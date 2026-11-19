@@ -1,0 +1,227 @@
+﻿:root {
+    --cps-red: #D70018;
+    --cps-red-dark: #B30014;
+    --cps-red-light: #FFF0F1;
+    --cps-bg: #F4F6F8;
+    --cps-text: #222222;
+}
+
+body {
+    background-color: var(--cps-bg);
+    color: var(--cps-text);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Top Bar & Sticky Red Header */
+.cps-topbar {
+    background-color: #E9EFFF;
+    color: #D70018;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 0;
+}
+
+.cps-header {
+    background-color: var(--cps-red);
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    box-shadow: 0 4px 12px rgba(215, 0, 24, 0.25);
+}
+
+.cps-logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff !important;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+}
+
+.cps-header-btn {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff !important;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.2;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .cps-header-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+.cps-search-box {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+    .cps-search-box input {
+        border: none;
+        box-shadow: none !important;
+        font-size: 14px;
+    }
+
+/* Menu danh mục bên trái Hero */
+.cps-sidebar-menu {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 8px 0;
+}
+
+    .cps-sidebar-menu a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 9px 14px;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: 0.15s;
+    }
+
+        .cps-sidebar-menu a:hover {
+            background-color: var(--cps-red-light);
+            color: var(--cps-red);
+            font-weight: 600;
+        }
+
+/* Khối Hot Sale Cuối Tuần */
+.cps-hotsale-box {
+    background: linear-gradient(180deg, #D70018 0%, #FF4D4F 100%);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(215, 0, 24, 0.2);
+}
+
+.countdown-badge {
+    background: #fff;
+    color: var(--cps-red);
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+/* Thẻ Sản Phẩm (Product Card) */
+.cps-product-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #eee;
+}
+
+    .cps-product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(215, 0, 24, 0.14);
+        border-color: #ffccd1;
+    }
+
+.cps-discount-ribbon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--cps-red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-top-left-radius: 13px;
+    border-bottom-right-radius: 12px;
+    z-index: 2;
+}
+
+.cps-installment-badge {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    border: 1px solid #0066CC;
+    color: #0066CC;
+    background: #F0F7FF;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.cps-product-img {
+    height: 175px;
+    object-fit: contain;
+    margin: 18px auto 12px;
+    transition: transform 0.25s ease;
+}
+
+.cps-product-card:hover .cps-product-img {
+    transform: scale(1.05);
+}
+
+.cps-product-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #222;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 40px;
+}
+
+    .cps-product-title:hover {
+        color: var(--cps-red);
+    }
+
+.cps-price-sale {
+    color: var(--cps-red);
+    font-size: 16.5px;
+    font-weight: 800;
+}
+
+.cps-price-old {
+    color: #707070;
+    font-size: 13px;
+    text-decoration: line-through;
+}
+
+.cps-promo-note {
+    background: #F3F4F6;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 12px;
+    color: #444;
+    margin-top: 8px;
+}
+
+.cps-filter-pill {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    color: #333;
+    border-radius: 10px;
+    padding: 6px 14px;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+    .cps-filter-pill:hover, .cps-filter-pill.active {
+        background: var(--cps-red-light);
+        border-color: var(--cps-red);
+        color: var(--cps-red);
+    }

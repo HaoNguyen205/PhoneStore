@@ -1,0 +1,42 @@
+﻿@model PhoneStore.Models.ChiTietDonHang
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ChiTietDonHang</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Soluong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Soluong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Dongia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dongia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bienthe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bienthe.Bientheid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Donhang)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Donhang.Donhangid)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Chitietid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

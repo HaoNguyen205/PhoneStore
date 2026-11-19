@@ -1,0 +1,130 @@
+﻿@model PhoneStore.Models.SanPham
+
+@{
+    ViewData["Title"] = Model.Tensanpham;
+    var bienTheDau = Model.BienTheSanphams.FirstOrDefault();
+}
+
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb small">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-danger text-decoration-none">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-route-hangId="@Model.Hangid" class="text-danger text-decoration-none">@Model.Hang?.Tenhang</a></li>
+        <li class="breadcrumb-item active">@Model.Tensanpham</li>
+    </ol>
+</nav>
+
+<div class="bg-white rounded-4 p-4 shadow-sm mb-4">
+    <h4 class="fw-bolder border-bottom pb-3 mb-4">@Model.Tensanpham</h4>
+
+    <div class="row g-4">
+        <!-- Cột ảnh sản phẩm -->
+        <div class="col-lg-5 text-center">
+            <div class="border rounded-4 p-4 bg-light">
+                <img id="mainProductImg" src="~/images/@Model.Hinhanh"
+                     onerror="this.src='https://placehold.co/400x400/fff0f1/d70018?text=@Uri.EscapeDataString(Model.Tensanpham)'"
+                     class="img-fluid" style="max-height: 340px; object-fit: contain;" alt="@Model.Tensanpham" />
+            </div>
+        </div>
+
+        <!-- Cột chọn phiên bản & giá bán -->
+        <div class="col-lg-7">
+            <div class="d-flex align-items-baseline gap-3 mb-3">
+                <span id="displaySalePrice" class="fs-2 fw-bolder text-danger">
+                    @((bienTheDau?.Giakhuyenmai ?? bienTheDau?.Giaban ?? 0).ToString("N0"))đ
+                </span>
+                <span id="displayOldPrice" class="fs-5 text-muted text-decoration-line-through">
+                    @((bienTheDau?.Giaban ?? 0).ToString("N0"))đ
+                </span>
+            </div>
+
+            <!-- Chọn phiên bản dung lượng / màu sắc -->
+            <h6 class="fw-bold mb-2">Chọn phiên bản màu sắc & dung lượng:</h6>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                @foreach (var bt in Model.BienTheSanphams)
+                {
+                    var giaHienThi = bt.Giakhuyenmai ?? bt.Giaban;
+                    <button type="button"
+                            class="btn @(bt == bienTheDau ? "btn-outline-danger active" : "btn-outline-secondary") text-start px-3 py-2 variant-btn"
+                            data-id="@bt.Bientheid"
+                            data-sale="@giaHienThi.ToString("N0")đ"
+                            data-old="@bt.Giaban.ToString("N0")đ"
+                            onclick="chonBienThe(this)">
+                        <div class="fw-bold small d-flex align-items-center gap-2">
+                            @if (!string.IsNullOrEmpty(bt.Mamau))
+                            {
+                                <span class="rounded-circle d-inline-block border" style="width:14px; height:14px; background:@bt.Mamau;"></span>
+                            }
+                            <span>@bt.Dungluong - @bt.Mausac</span>
+                        </div>
+                        <div class="small text-danger fw-semibold">@giaHienThi.ToString("N0")đ</div>
+                    </button>
+                }
+            </div>
+
+            <!-- Khung khuyến mãi  -->
+            <div class="border border-danger rounded-3 overflow-hidden mb-4">
+                <div class="bg-danger text-white fw-bold px-3 py-2">
+                    <i class="fa-solid fa-gift me-2"></i>Khuyến mãi & Ưu đãi đặc biệt tại HQKStore
+                </div>
+                <ul class="list-group list-group-flush small">
+                    @foreach (var km in Model.KhuyenMaiSanPhams)
+                    {
+                        <li class="list-group-item">
+                            <i class="fa-solid fa-circle-check text-success me-2"></i>@km.Noidungkm
+                        </li>
+                    }
+                    <li class="list-group-item">
+                        <i class="fa-solid fa-circle-check text-success me-2"></i>
+                        Thu cũ lên đời trợ giá ngay <strong>@Model.Trogiathucu.ToString("N0")đ</strong>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Nút Mua Ngay -->
+            <form asp-controller="GioHang" asp-action="ThemVaoGio" method="post" class="d-flex gap-2">
+                <input type="hidden" name="bientheId" id="selectedVariantId" value="@bienTheDau?.Bientheid" />
+                <button type="submit" class="btn btn-danger btn-lg flex-grow-1 fw-bold py-3">
+                    MUA NGAY<br />
+                    <span class="fw-normal small">(Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng)</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Thông số kỹ thuật & Mô tả -->
+    <div class="row g-4 mt-4 pt-3 border-top">
+        <div class="col-lg-7">
+            <h5 class="fw-bold mb-3">Đặc điểm nổi bật</h5>
+            <p class="fw-semibold text-dark">@Model.Tomtat</p>
+            <p class="text-muted" style="line-height: 1.7;">@Model.Mota</p>
+        </div>
+        <div class="col-lg-5">
+            <h5 class="fw-bold mb-3">Thông số kỹ thuật</h5>
+            <table class="table table-striped table-bordered small">
+                <tr><th style="width:35%">Màn hình</th><td>@Model.Manhinh</td></tr>
+                <tr><th>Chip xử lý</th><td>@Model.Chip</td></tr>
+                <tr><th>RAM</th><td>@Model.Ram</td></tr>
+                <tr><th>Camera</th><td>@Model.Camera</td></tr>
+                <tr><th>Pin & Sạc</th><td>@Model.Pin</td></tr>
+                <tr><th>Hệ điều hành</th><td>@Model.Hedieuhanh</td></tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function chonBienThe(btn) {
+            document.querySelectorAll('.variant-btn').forEach(b => {
+                b.classList.remove('btn-outline-danger', 'active');
+                b.classList.add('btn-outline-secondary');
+            });
+            btn.classList.remove('btn-outline-secondary');
+            btn.classList.add('btn-outline-danger', 'active');
+
+            document.getElementById('selectedVariantId').value = btn.dataset.id;
+            document.getElementById('displaySalePrice').innerText = btn.dataset.sale;
+            document.getElementById('displayOldPrice').innerText = btn.dataset.old;
+        }
+    </script>
+}
