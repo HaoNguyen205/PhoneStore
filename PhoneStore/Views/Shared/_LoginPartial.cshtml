@@ -2,25 +2,43 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+    <div class="dropdown">
+        <button class="cps-header-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            <i class="fa-regular fa-circle-user fs-5"></i>
+            <div class="text-start">
+                <div style="font-size: 11px;">Xin chào</div>
+                <div class="fw-bold">@User.Identity?.Name</div>
+            </div>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">
+                    <i class="fa-solid fa-user-gear me-2"></i>Quản lý tài khoản
+                </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+                <form class="m-0" asp-area="Identity" asp-page="/Account/Logout"
+                      asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="dropdown-item text-danger fw-semibold">
+                        <i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+    <div class="d-flex align-items-center gap-2">
+        <a class="cps-header-btn py-2" asp-area="Identity" asp-page="/Account/Login">
+            <i class="fa-regular fa-circle-user fs-5"></i>
+            <span class="fw-bold">Đăng nhập</span>
+        </a>
+        <a class="cps-header-btn py-2 d-none d-xl-inline-flex" asp-area="Identity" asp-page="/Account/Register">
+            <span class="fw-bold">Đăng ký</span>
+        </a>
+    </div>
 }
-</ul>

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using PhoneStore.Models;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace PhoneStore.Data;
 
-public partial class ApplicationDbContext : DbContext
+public partial class ApplicationDbContext : IdentityDbContext
 {
     public ApplicationDbContext()
     {
@@ -46,6 +46,8 @@ public partial class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<BienTheSanpham>(entity =>
         {
             entity.HasKey(e => e.Bientheid).HasName("PK__BienTheS__C2F483718EA38D20");
@@ -154,4 +156,5 @@ public partial class ApplicationDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    
 }

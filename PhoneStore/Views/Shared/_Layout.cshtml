@@ -28,7 +28,7 @@
                 </a>
 
                 <!-- Nút Danh mục -->
-                <a class="cps-header-btn d-none d-lg-inline-flex" asp-controller="SanPham" asp-action="Index">
+                <a class="cps-header-btn d-none d-lg-inline-flex" asp-controller="SanPhams" asp-action="Index">
                     <i class="fa-solid fa-bars fs-5"></i>
                     <span>Danh mục</span>
                 </a>
@@ -51,7 +51,7 @@
                 </div>
 
                 <!-- Thanh tìm kiếm -->
-                <form class="flex-grow-1" asp-controller="SanPham" asp-action="Index" method="get">
+                <form class="flex-grow-1" asp-controller="SanPhams" asp-action="Index" method="get">
                     <div class="input-group cps-search-box">
                         <span class="input-group-text bg-white border-0 text-muted">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -69,7 +69,7 @@
                     </div>
                 </a>
 
-                <a class="cps-header-btn d-none d-lg-inline-flex" asp-controller="DonHang" asp-action="TraCuu">
+                <a class="cps-header-btn d-none d-lg-inline-flex" asp-controller="DonHangs" asp-action="TraCuu">
                     <i class="fa-solid fa-truck-fast fs-5"></i>
                     <div class="text-start">
                         <div>Tra cứu</div>
@@ -86,37 +86,8 @@
                     </div>
                 </a>
 
-                <!-- Tài khoản  -->
-                @{
-                    var tenUser = Context.Session.GetString("HoTen");
-                }
-                @if (!string.IsNullOrEmpty(tenUser))
-                {
-                    <div class="dropdown">
-                        <button class="cps-header-btn dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa-regular fa-circle-user fs-5"></i>
-                            <div class="text-start">
-                                <div style="font-size: 11px;">Smember</div>
-                                <div class="fw-bold">@tenUser</div>
-                            </div>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow">
-                            <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile">Hồ sơ thành viên</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">Đăng xuất</a></li>
-                        </ul>
-                    </div>
-                }
-                else
-                {
-                    <a class="cps-header-btn" asp-controller="Account" asp-action="Login">
-                        <i class="fa-regular fa-circle-user fs-5"></i>
-                        <div class="text-start">
-                            <div>Đăng </div>
-                            <div class="fw-bold">nhập</div>
-                        </div>
-                    </a>
-                }
+                <!-- Tài khoản (Identity) -->
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </header>
